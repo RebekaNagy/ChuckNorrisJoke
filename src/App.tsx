@@ -42,19 +42,16 @@ function App() {
 				(data) => {
 					setJokeCategories(data);
 					setLoading(false);
-					console.log(jokeCategories);
 				}
 			);
 		}
 	}, [jokeCategories, loading]);
 
 	const categoryClickHandler = (categoryName: string) => {
-		console.log("clicked " + categoryName);
 		fetcher(
 			"https://api.chucknorris.io/jokes/random?category=" + categoryName
 		).then((data) => {
 			setJoke(data.value);
-			console.log(joke);
 		});
 	};
 
