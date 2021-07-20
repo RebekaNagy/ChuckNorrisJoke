@@ -31,6 +31,7 @@ function App() {
 	const [loading, setLoading] = useState(true);
 	const [jokeCategories, setJokeCategories] = useState([]);
 	const [joke, setJoke] = useState("");
+	const [open, setOpen] = useState(false);
 
 	async function fetcher(url: string) {
 		return await fetch(url).then((response) => response.json());
@@ -53,6 +54,7 @@ function App() {
 		).then((data) => {
 			setJoke(data.value);
 		});
+		handleOpen();
 	};
 
 	const categoryItems = jokeCategories.map((c) => (
@@ -62,6 +64,15 @@ function App() {
 			onCategoryClicked={categoryClickHandler}
 		/>
 	));
+
+	const handleOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+		setJoke("Loading...");
+	};
 
 	return (
 		<div className={classes.root}>
@@ -76,7 +87,7 @@ function App() {
 				)}
 			</Container>
 			<Container maxWidth="xs">
-				<Joke joke={joke} />
+				<Joke joke={joke} open={open} handleClose={handleClose} />
 			</Container>
 		</div>
 	);
