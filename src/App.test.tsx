@@ -25,14 +25,8 @@ test("renders CategoryItem", () => {
 
 test("renders Joke", () => {
 	act(() => {
-		render(<Joke joke={""} />);
+		render(<Joke joke={"Punchline."} open={true} handleClose={() => {}} />);
 	});
-	let jokeCard = screen.getByText(/Choose a category.../i);
-	expect(jokeCard).toBeInTheDocument();
-
-	act(() => {
-		render(<Joke joke={"Punchline."} />);
-	});
-	jokeCard = screen.getByText(/Punchline./i);
+	let jokeCard = screen.getByText(/Punchline./i);
 	expect(jokeCard).toBeInTheDocument();
 });
