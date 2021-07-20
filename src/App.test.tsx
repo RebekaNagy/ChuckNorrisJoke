@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import App from "./App";
 import CategoryItem from "./components/CategoryItem";
 import { act } from "react-dom/test-utils";
@@ -29,4 +29,21 @@ test("renders Joke", () => {
 	});
 	let jokeCard = screen.getByText(/Punchline./i);
 	expect(jokeCard).toBeInTheDocument();
+});
+
+test("loading text before fetch", () => {
+	render(<App />);
+	const loadingText = screen.getByText(/Loading/i);
+	expect(loadingText).toBeInTheDocument();
+});
+
+test("categories on screen after fetch", async () => {
+	render(<App />);
+	await waitFor(
+		() => {
+			const categoriesText = screen.getByText(/Categories/i);
+			expect(categoriesText).toBeInTheDocument();
+		},
+		{ timeout: 500 }
+	);
 });
