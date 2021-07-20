@@ -1,3 +1,5 @@
+import ListItem from "@material-ui/core/ListItem";
+
 interface ICategoryProps {
 	category: string;
 	onCategoryClicked: (cat: string) => void;
@@ -5,9 +7,12 @@ interface ICategoryProps {
 
 const CategoryItem: React.FC<ICategoryProps> = (props: ICategoryProps) => {
 	return (
-		<div onClick={() => props.onCategoryClicked(props.category)}>
+		<ListItem
+			button
+			onClick={() => props.onCategoryClicked(props.category)}
+		>
 			{props.category}
-		</div>
+		</ListItem>
 	);
 };
 

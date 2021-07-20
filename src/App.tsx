@@ -3,12 +3,25 @@ import CategoryItem from "./components/CategoryItem";
 import Joke from "./components/Joke";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+import { Container } from "@material-ui/core";
+import ListSubheader from "@material-ui/core/ListSubheader";
 
 const useStyles = makeStyles({
 	root: {
 		width: "80%",
-		maxWidth: 500,
+		display: "flex",
+		flexDirection: "row",
+		margin: "2%",
+	},
+	card: {
+		float: "right",
+		alignItems: "center",
+	},
+	list: {
+		width: "100px",
+		height: "10px",
+		position: "absolute",
+		display: "none",
 	},
 });
 
@@ -46,19 +59,28 @@ function App() {
 	};
 
 	const categoryItems = jokeCategories.map((c) => (
-		<ListItem key={jokeCategories.indexOf(c)}>
-			<CategoryItem
-				category={c}
-				onCategoryClicked={categoryClickHandler}
-			/>
-		</ListItem>
+		<CategoryItem
+			key={jokeCategories.indexOf(c)}
+			category={c}
+			onCategoryClicked={categoryClickHandler}
+		/>
 	));
 
 	return (
 		<div className={classes.root}>
-			<h3>Categories</h3>
-			{loading ? <div>Loading...</div> : <List>{categoryItems}</List>}
-			<Joke joke={joke} />
+			<Container maxWidth="xs">
+				{loading ? (
+					<div>Loading...</div>
+				) : (
+					<List>
+						<ListSubheader>Categories</ListSubheader>
+						{categoryItems}
+					</List>
+				)}
+			</Container>
+			<Container maxWidth="xs">
+				<Joke joke={joke} />
+			</Container>
 		</div>
 	);
 }
