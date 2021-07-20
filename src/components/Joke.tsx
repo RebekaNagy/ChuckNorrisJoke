@@ -25,7 +25,7 @@ const Joke: React.FC<IJokeProps> = (props: IJokeProps) => {
 	return (
 		<Modal open={props.open} onClose={props.handleClose}>
 			<Typography className={classes.paper} variant="body2" component="p">
-				{props.joke || "Choose a category..."}
+				{props.joke || "Loading..."}
 			</Typography>
 		</Modal>
 		/*<Card>
